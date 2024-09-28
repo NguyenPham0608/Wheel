@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spin the Wheel!</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- <input
+        type="range"
+        id="speed"
+        value="0.1"
+        min="0"
+        max="6.2832"
+        step="0.01"
+    > -->
+    <button id="springButton" onclick="spin(1.1)">Spin!</button>
+    <canvas
+        id="myCanvas"
+        width="700px"
+        height="700px"
+    ></canvas>
+    <script src="wheel.js"></script>
+    <script>
+        const ctx=myCanvas.getContext("2d")
+
+        const center={x: myCanvas.width/2, y: myCanvas.height/2}
+        const radius=myCanvas.width*0.4
+
+        const button = document.getElementById('springButton');
+
+        button.addEventListener('click', () => {
+            // Prevent re-adding the class if it's already animating
+            if (!button.classList.contains('shrinking')) {
+                button.classList.add('shrinking');
+                
+                // Remove the shrinking class after the animation finishes
+                setTimeout(() => {
+                    button.classList.remove('shrinking');
+                }, 800); // Match this time to the duration of your size bounce animation
+            }
+        });
+
+
+
+        const colorChoices=[
+            "red",
+            "orange",
+            "yellow",
+            "lime",
+            "green",
+            "blue",
+            "indigo",
+            "purple",
+            "violet",
+        ]
+        // const colors=shuffleArray(colorChoices)
+        const colors=colorChoices
+
+        
+        for(let i=0;i<8;i++){
+            colors.push
+        }
+
+        function spin(spinSpeed){
+            speed=spinSpeed
+        }
+
+        const wheel=new Wheel(center, radius, colors)
+        // const wheel2=new Wheel(center, 40, shuffleArray(colorChoices))
+
+        let angle=0
+        let speed=0
+
+        function line(){
+            ctx.beginPath()
+            ctx.strokeStyle="black"
+            ctx.lineWidth=3
+            ctx.moveTo(center.x, 20+center.y-radius)
+            ctx.lineTo(center.x, -20+center.y-radius)
+            ctx.stroke()
+        }
+
+        animate()
+        function animate(){
+            ctx.globalAlpha=1/(speed*30)
+
+            line()
+            const lastAngle=angle
+            angle+=Number(speed)
+            for(let a=lastAngle;a<=angle;a+=0.01){
+                wheel.draw(ctx, a)
+                // wheel2.draw(ctx, a)
+
+                line()
+
+            }
+
+            line()
+            requestAnimationFrame(animate)
+        }
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                let randomIndex = Math.floor(Math.random() * (i + 1));
+                // Swap elements
+                [array[i], array[randomIndex]] = [array[randomIndex], array[i]];
+            }
+            return array;
+        }
+    </script>
+</body>
+</html>

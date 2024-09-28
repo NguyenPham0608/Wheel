@@ -1,0 +1,33 @@
+#myCanvas{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+#springButton {
+    padding: 10px 20px;
+    font-size: 18px;
+    border: none;
+    border-radius: 8px;
+    background-color: #007BFF;
+    color: white;
+    cursor: pointer;
+    position: fixed;
+    transition: transform 0.3s ease-out;
+    top: 90%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+
+#springButton.shrinking {
+    animation: sizeBounce 0.2s ease-out;
+}
+
+/* Keyframes for size bounce effect */
+@keyframes sizeBounce {
+    0%   { transform: translate(-50%, -50%) scale(1.6); }   /* Start at normal size, centered */
+    30%  { transform: translate(-50%, -50%) scale(1.3); } /* Grow bigger, remain centered */
+    60%  { transform: translate(-50%, -50%) scale(1); }/* Slight shrink, centered */
+}
+
